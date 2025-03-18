@@ -7,14 +7,11 @@ Actividas del colegio.
 - 🔹 ganar notas
 - 🔹 ganas la materia
 
-## 🛠️ Instalación
-
 ## 📚 Uso
+- profesor uselo para ponernos buienas notas. :)
 
-Explica cómo usar tu proyecto con ejemplos y comandos útiles.
+## 📝 Licencia
 
-## 🏗️ Tecnologías Utilizadas
-
-- ⚡ 
-- ⚡ Tecnología 2
-- ⚡ Tecnología 3
+Este proyecto está bajo la licencia [Licencia de colegio](LICENSE).
+## 📞 Contacto
+*********
