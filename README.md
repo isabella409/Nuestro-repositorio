@@ -8,7 +8,7 @@ Actividas del colegio.
 - 🔹 ganas la materia
 
 ## 📚 Uso
-- profesor uselo para ponernos buienas notas. :)
+- profesor uselo para ponernos buenas notas. :)
 
 ## 📝 Licencia
 
