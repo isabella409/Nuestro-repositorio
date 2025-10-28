@@ -1,16 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recordatorio academico</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recordatorio de Tareas</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Recordatorio Academico</h1>
-    <img src="https://img.freepik.com/foto-gratis/ilustracion-3d-sombrero-academico-borla-dorada_107791-16182.jpg?semt=ais_hybrid&w=740&q=80" />
-    <a href="calendario.html">Calendario</a>
-    <a href="alarmas.html"> Alarmas</a>
-    <h4>Grupo de Isabella, Venus y Santacruz</h4>
+  <!-- Pantalla de inicio de sesión -->
+  <div id="login-container">
+    <h1>Bienvenido</h1>
+    <form id="loginForm">
+      <label for="username">Usuario:</label>
+      <input type="text" id="username" required>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" required>
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+  </div>
+<!-- Página principal (se muestra después de iniciar sesión) -->
+  <div id="app-container" class="hidden">
+    <header>
+      <h2>📒 Mis Tareas</h2>
+      <nav>
+        <button id="logoutBtn">Cerrar Sesión</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="task-section">
+        <h3>Agregar Tarea</h3>
+        <form id="taskForm">
+          <input type="text" id="taskInput" placeholder="Escribe tu tarea..." required>
+          <button type="submit">➕ Agregar</button>
+        </form>
+      </section>
+
+      <section class="task-list-section">
+        <h3>Lista de Tareas</h3>
+        <ul id="taskList"></ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
