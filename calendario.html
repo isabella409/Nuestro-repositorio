@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recordatorios - Calendario</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Menú -->
+  <nav>
+    <h2>Mis Recordatorios</h2>
+    <ul id="menu">
+      <li>Tareas (<span id="contador-tareas">0</span>)</li>
+      <li>Exámenes (<span id="contador-examenes">0</span>)</li>
+      <li>Proyectos (<span id="contador-proyectos">0</span>)</li>
+    </ul>
+  </nav>
+
+  <!-- Formulario para agregar tarea -->
+  <section class="formulario">
+    <h3>Agregar nuevo recordatorio</h3>
+    <input type="text" id="nuevaTarea" placeholder="Escribe tu tarea...">
+    <select id="categoria">
+      <option value="tareas">Tarea</option>
+      <option value="examenes">Examen</option>
+      <option value="proyectos">Proyecto</option>
+    </select>
+    <input type="date" id="fecha">
+    <button onclick="agregarTarea()">Agregar</button>
+  </section>
+
+  <!-- Listado -->
+  <section>
+    <h3>Listado de Recordatorios</h3>
+    <ul id="lista"></ul>
+  </section>
+
+  <!-- Calendario -->
+  <section class="calendario">
+    <h3>Calendario</h3>
+    <div id="calendar"></div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
