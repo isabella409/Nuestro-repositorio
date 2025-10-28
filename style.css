@@ -87,3 +87,121 @@ li button {
 li button:hover {
   background-color: #ff4da6;
 }
+body {
+  background-color: #ffd9e8; /* rosado pastel */
+  font-family: "Cursive", sans-serif;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background-color: #ffb6c1;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #ff8fab;
+}
+
+nav h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+.formulario {
+  text-align: center;
+  margin: 20px;
+}
+
+input, select {
+  padding: 10px;
+  border: 2px solid #ff8fab;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #ff8fab;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #ff4f7b;
+  color: white;
+}
+
+section ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px;
+}
+
+section ul li {
+  background-color: #ffe6eb;
+  border: 1px solid #ff8fab;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
+JS 
+let tareas = {
+  tareas: [],
+  examenes: [],
+  proyectos: []
+};
+
+function agregarTarea() {
+  const texto = document.getElementById("nuevaTarea").value;
+  const categoria = document.getElementById("categoria").value;
+
+  if (texto.trim() === "") {
+    alert("Por favor, escribe una tarea.");
+    return;
+  }
+
+  // Agregar tarea a la lista de la categoría
+  tareas[categoria].push(texto);
+
+  // Actualizar lista
+  mostrarTareas();
+
+  // Limpiar input
+  document.getElementById("nuevaTarea").value = "";
+}
+
+function mostrarTareas() {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  // Mostrar cada tarea con su categoría
+  for (let categoria in tareas) {
+    tareas[categoria].forEach(tarea => {
+      const li = document.createElement("li");
+      li.textContent = `${tarea} (${categoria})`;
+      lista.appendChild(li);
+    });
+  }
+
+  // Actualizar contadores en el menú
+  document.getElementById("contador-tareas").textContent = tareas.tareas.length;
+  document.getElementById("contador-examenes").textContent = tareas.examenes.length;
+  document.getElementById("contador-proyectos").textContent = tareas.proyectos.length;
+}
+
