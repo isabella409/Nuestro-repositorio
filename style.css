@@ -205,3 +205,232 @@ function mostrarTareas() {
   document.getElementById("contador-proyectos").textContent = tareas.proyectos.length;
 }
 
+body {
+  background-color: #ffd9e8; /* rosado pastel */
+  font-family: "Cursive", sans-serif;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background-color: #ffb6c1;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #ff8fab;
+}
+
+nav h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+.formulario {
+  text-align: center;
+  margin: 20px;
+}
+
+input, select {
+  padding: 10px;
+  border: 2px solid #ff8fab;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #ff8fab;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #ff4f7b;
+  color: white;
+}
+
+section ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px;
+}
+
+section ul li {
+  background-color: #ffe6eb;
+  border: 1px solid #ff8fab;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Estilo del calendario */
+.calendario {
+  margin: 20px;
+  text-align: center;
+}
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.dia {
+  border: 1px solid #ff8fab;
+  background: #ffe6eb;
+  padding: 15px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.dia h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.tarea-pendiente {
+  background-color: #ff4f7b;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+.tarea-finalizada {
+  background-color: #4caf50;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+
+JS
+
+
+let tareas = {
+  tareas: [],
+  examenes: [],
+  proyectos: []
+};
+
+// Generar calendario actual
+function generarCalendario() {
+  const calendar = document.getElementById("calendar");
+  calendar.innerHTML = "";
+
+  let fecha = new Date();
+  let año = fecha.getFullYear();
+  let mes = fecha.getMonth();
+  let primerDia = new Date(año, mes, 1).getDay();
+  let diasMes = new Date(año, mes + 1, 0).getDate();
+
+  // Espacios vacíos antes del primer día
+  for (let i = 0; i < primerDia; i++) {
+    const empty = document.createElement("div");
+    calendar.appendChild(empty);
+  }
+
+  // Días del mes
+  for (let d = 1; d <= diasMes; d++) {
+    const day = document.createElement("div");
+    day.classList.add("dia");
+    day.innerHTML = `<h4>${d}</h4>`;
+    calendar.appendChild(day);
+  }
+}
+
+// Agregar tarea
+function agregarTarea() {
+  const texto = document.getElementById("nuevaTarea").value;
+  const categoria = document.getElementById("categoria").value;
+  const fecha = document.getElementById("fecha").value;
+
+  if (texto.trim() === "" || fecha === "") {
+    alert("Por favor, escribe una tarea y selecciona una fecha.");
+    return;
+  }
+
+  // Guardar tarea
+  tareas[categoria].push({ texto, fecha, finalizada: false });
+
+  mostrarTareas();
+  actualizarCalendario();
+  document.getElementById("nuevaTarea").value = "";
+  document.getElementById("fecha").value = "";
+}
+
+// Mostrar listado
+function mostrarTareas() {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  for (let categoria in tareas) {
+    tareas[categoria].forEach((t, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        ${t.texto} - ${t.fecha} (${categoria})
+        <button onclick="finalizarTarea('${categoria}', ${index})">✔</button>
+      `;
+      lista.appendChild(li);
+    });
+  }
+
+  document.getElementById("contador-tareas").textContent = tareas.tareas.length;
+  document.getElementById("contador-examenes").textContent = tareas.examenes.length;
+  document.getElementById("contador-proyectos").textContent = tareas.proyectos.length;
+}
+
+// Marcar como finalizada
+function finalizarTarea(categoria, index) {
+  tareas[categoria][index].finalizada = true;
+  mostrarTareas();
+  actualizarCalendario();
+}
+
+// Mostrar en calendario
+function actualizarCalendario() {
+  generarCalendario();
+
+  for (let categoria in tareas) {
+    tareas[categoria].forEach(t => {
+      const fecha = new Date(t.fecha);
+      let hoy = new Date();
+      if (fecha.getMonth() === hoy.getMonth()) {
+        const dia = fecha.getDate();
+        const cells = document.getElementsByClassName("dia");
+        let cell = cells[dia - 1 + new Date(hoy.getFullYear(), hoy.getMonth(), 1).getDay()];
+        if (cell) {
+          const span = document.createElement("span");
+          span.textContent = t.texto;
+          span.className = t.finalizada ? "tarea-finalizada" : "tarea-pendiente";
+          cell.appendChild(span);
+        }
+      }
+    });
+  }
+}
+
+// Inicializar
+generarCalendario();
+
+
